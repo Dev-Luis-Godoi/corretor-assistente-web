@@ -1,0 +1,9 @@
+import {CalendarPlus,ChevronRight,MessageCircle} from 'lucide-react'
+import {useState} from 'react'
+import type { Lead,Priority } from '../types'
+import {PriorityBadge} from './PriorityBadge'
+
+interface ItemProps{lead:Lead;onOpen:(lead:Lead)=>void}
+export function AttentionLeadItem({lead,onOpen}:ItemProps){return <div className="lead-row"><div className="lead-person"><span className="avatar">{lead.initials}</span><div><strong>{lead.name}</strong><span>{lead.interest}</span></div></div><div className="lead-interaction"><strong>{lead.lastInteraction}</strong><span>{lead.waiting}</span></div><PriorityBadge priority={lead.priority}/><div className="quick-actions"><button title="Responder" aria-label={`Responder ${lead.name}`}><MessageCircle size={17}/></button><button title="Agendar follow-up" aria-label={`Agendar follow-up para ${lead.name}`}><CalendarPlus size={17}/></button><button className="open-lead" onClick={()=>onOpen(lead)} aria-label={`Abrir lead ${lead.name}`}><ChevronRight size={18}/></button></div></div>}
+interface Props{leads:Lead[];onOpen:(lead:Lead)=>void}
+export function AttentionLeadList({leads,onOpen}:Props){const [filter,setFilter]=useState<'Todos'|Priority>('Todos');return <section className="panel attention-panel"><div className="section-header"><div><h2>Leads que precisam de atenção</h2><p>Ordenados por tempo de espera e prioridade</p></div><div className="filter-group" aria-label="Filtrar por prioridade">{(['Todos','Alta','Média'] as const).map(x=><button key={x} className={filter===x?'selected':''} onClick={()=>setFilter(x)}>{x}</button>)}</div></div><div className="lead-list">{leads.filter(l=>filter==='Todos'||l.priority===filter).map(l=><AttentionLeadItem key={l.id} lead={l} onOpen={onOpen}/>)}</div><button className="text-button">Ver todos os leads <ChevronRight size={16}/></button></section>}
