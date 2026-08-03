@@ -1,0 +1,1 @@
+.compact-dashboard{max-width:1320px}.compact-dashboard-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.compact-dashboard-grid .panel{min-height:360px}@media(max-width:900px){.compact-dashboard-grid{grid-template-columns:1fr}}@media(max-width:600px){.compact-dashboard{padding-top:16px}}

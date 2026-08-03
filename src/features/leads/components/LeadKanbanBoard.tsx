@@ -1,0 +1,11 @@
+import {GripVertical,Phone,UserRound} from 'lucide-react'
+import type {DragEvent} from 'react'
+import type {Lead,LeadStage} from '../types'
+
+const money=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0})
+interface Props{leads:Lead[];stages:LeadStage[];movingId:string|null;onMove:(leadId:string,stageId:string)=>void}
+export function LeadKanbanBoard({leads,stages,movingId,onMove}:Props){
+ const start=(event:DragEvent,leadId:string)=>{event.dataTransfer.setData('text/lead-id',leadId);event.dataTransfer.effectAllowed='move'}
+ const drop=(event:DragEvent,stageId:string)=>{event.preventDefault();const leadId=event.dataTransfer.getData('text/lead-id');if(leadId)onMove(leadId,stageId)}
+ return <div className="kanban-board">{stages.map(stage=>{const stageLeads=leads.filter(lead=>lead.stage.id===stage.id);const total=stageLeads.reduce((sum,lead)=>sum+Number(lead.estimatedValue??0),0);return <section className="kanban-column" key={stage.id} onDragOver={event=>event.preventDefault()} onDrop={event=>drop(event,stage.id)}><header><div><i style={{background:stage.color}}/><strong>{stage.name}</strong><span>{stageLeads.length}</span></div><small>{money.format(total)}</small></header><div className="kanban-cards">{stageLeads.map(lead=><article className={`kanban-card ${movingId===lead.id?'moving':''}`} draggable onDragStart={event=>start(event,lead.id)} key={lead.id}><div className="kanban-card-top"><span>{lead.source||'Sem origem'}</span><GripVertical size={15}/></div><h3>{lead.title}</h3><p><UserRound size={13}/>{lead.contact.name||'Contato sem nome'}</p><p><Phone size={13}/>{lead.contact.phone}</p><footer><strong>{lead.estimatedValue?money.format(Number(lead.estimatedValue)):'Valor não informado'}</strong><span className="avatar">{lead.assignedUser?.name?.slice(0,2).toUpperCase()||'--'}</span></footer></article>)}{stageLeads.length===0&&<div className="kanban-empty">Solte um lead aqui</div>}</div></section>})}</div>
+}
