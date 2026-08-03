@@ -1,7 +1,12 @@
 export interface LeadContact{id:string;name:string|null;phone:string;email:string|null}
 export interface LeadStage{id:string;name:string;position:number;color:string;isWon:boolean;isLost:boolean}
-export interface LeadAssignedUser{id:string;name:string;email:string}
-export interface Lead{id:string;title:string;source:string|null;notes:string|null;estimatedValue:string|null;closedAt:string|null;lostReason:string|null;organizationId:string;contact:LeadContact;stage:LeadStage;assignedUser:LeadAssignedUser|null;createdAt:string;updatedAt:string}
+export interface LeadAssignedUser{id:string;name:string}
+export interface LeadActivity{id:string;type:'CREATED'|'NOTE'|'CALL'|'EMAIL'|'WHATSAPP'|'STAGE_CHANGED';description:string;createdAt:string;createdBy:{id:string;name:string}|null}
+export interface LeadTask{id:string;title:string;description:string|null;dueAt:string;status:'PENDING'|'COMPLETED'|'CANCELED';priority:'LOW'|'MEDIUM'|'HIGH';completedAt:string|null}
+export interface LeadStageHistory{id:string;fromStageId:string|null;changedAt:string;toStage:{id:string;name:string;color:string|null}}
+export interface Lead{id:string;title:string;source:string|null;notes:string|null;interest:string|null;tags:string[];estimatedValue:string|null;closedAt:string|null;lostReason:string|null;nextFollowUpAt:string|null;expectedCloseAt:string|null;lastInteractionAt:string|null;organizationId:string;contact:LeadContact;stage:LeadStage;assignedUser:LeadAssignedUser|null;conversations:{id:string}[];_count:{activities:number;tasks:number};activities?:LeadActivity[];tasks?:LeadTask[];stageHistory?:LeadStageHistory[];createdAt:string;updatedAt:string}
 export interface LeadsMeta{page:number;limit:number;total:number;totalPages:number}
 export interface LeadsResponse{data:Lead[];meta:LeadsMeta}
 export interface PipelineStagesResponse{stages:LeadStage[]}
+export interface Contact{id:string;name:string|null;phone:string;email:string|null}
+export interface OrganizationUser{id:string;name:string;role:string}

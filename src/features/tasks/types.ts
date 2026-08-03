@@ -1,0 +1,1 @@
+export interface Task{ id:string;title:string;description:string|null;dueAt:string;status:'PENDING'|'COMPLETED'|'CANCELED';priority:'LOW'|'MEDIUM'|'HIGH';completedAt:string|null;lead:{id:string;title:string;contact:{name:string|null;phone:string}}|null;assignedUser:{id:string;name:string;email:string}|null;createdAt:string;updatedAt:string }

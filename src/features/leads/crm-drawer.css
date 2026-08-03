@@ -1,0 +1,1 @@
+.crm-fields select{width:100%;border:1px solid var(--border);border-radius:8px;padding:9px;font:inherit;margin-top:5px;background:#fff}.crm-field-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}@media(max-width:460px){.crm-field-grid{grid-template-columns:1fr}}

@@ -9,6 +9,8 @@ import {RegisterPage} from '@/features/auth/pages/RegisterPage'
 import {ForgotPasswordPage} from '@/features/auth/pages/ForgotPasswordPage'
 import {ResetPasswordPage} from '@/features/auth/pages/ResetPasswordPage'
 import {WhatsAppIntegrationPage} from '@/features/integrations/pages/WhatsAppIntegrationPage'
+import {TasksPage} from '@/features/tasks/TasksPage'
+import {AutomationsPage} from '@/features/automations/AutomationsPage'
 
 export function App(){
  const {user,loading,logout}=useAuth()
@@ -23,6 +25,8 @@ export function App(){
   <Route path="/leads" element={user?<LeadsPage onLogout={logout}/>:<Navigate to="/login" replace/>}/>
   <Route path="/pipeline" element={user?<PipelinePage onLogout={logout}/>:<Navigate to="/login" replace/>}/>
   <Route path="/conversations" element={user?<ConversationsPage onLogout={logout}/>:<Navigate to="/login" replace/>}/>
+  <Route path="/tasks" element={user?<TasksPage onLogout={logout}/>:<Navigate to="/login" replace/>}/>
+  <Route path="/automations" element={user?<AutomationsPage onLogout={logout}/>:<Navigate to="/login" replace/>}/>
   <Route path="/integrations/whatsapp" element={user?(canManageWhatsApp?<WhatsAppIntegrationPage onLogout={logout}/>:<Navigate to="/" replace/>):<Navigate to="/login" replace/>}/>
   <Route path="*" element={<Navigate to={user?'/':'/login'} replace/>}/>
  </Routes>

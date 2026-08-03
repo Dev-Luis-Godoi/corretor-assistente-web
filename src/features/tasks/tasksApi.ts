@@ -1,0 +1,3 @@
+import {apiRequest} from '@/shared/api/apiClient'
+import type {Task} from './types'
+export const tasksApi={list:(status?:string)=>apiRequest<{tasks:Task[]}>(`/tasks${status?`?status=${status}`:''}`),create:(input:{title:string;description?:string;dueAt:string;priority:string;leadId?:string})=>apiRequest<{task:Task}>('/tasks',{method:'POST',body:JSON.stringify(input)}),update:(id:string,input:Partial<Pick<Task,'title'|'description'|'dueAt'|'priority'|'status'>>)=>apiRequest<{task:Task}>(`/tasks/${id}`,{method:'PATCH',body:JSON.stringify(input)}),remove:(id:string)=>apiRequest<void>(`/tasks/${id}`,{method:'DELETE'})}
