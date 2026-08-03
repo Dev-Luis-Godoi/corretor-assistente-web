@@ -11,7 +11,7 @@
 }
 
 /* Base para campos independentes em formulários. */
-:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) :is(input:not([type='checkbox']):not([type='color']),select){
+:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form,.settings-form) :is(input:not([type='checkbox']):not([type='color']),select){
  width:100%;
  height:var(--field-height);
  border:1px solid var(--field-border);
@@ -26,7 +26,7 @@
  transition:border-color .16s ease,box-shadow .16s ease,background-color .16s ease;
 }
 
-:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) textarea{
+:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form,.settings-form) textarea{
  width:100%;
  min-height:96px;
  border:1px solid var(--field-border);
@@ -42,7 +42,7 @@
  transition:border-color .16s ease,box-shadow .16s ease,background-color .16s ease;
 }
 
-:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) select{
+:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form,.settings-form) select{
  appearance:none;
  cursor:pointer;
  padding-right:36px;
@@ -51,35 +51,35 @@
  background-position:right 12px center;
 }
 
-:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) :is(input,select,textarea):hover:not(:disabled){
+:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form,.settings-form) :is(input,select,textarea):hover:not(:disabled){
  border-color:var(--field-border-hover);
  background-color:#fff;
 }
 
-:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) :is(input,select,textarea):focus{
+:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form,.settings-form) :is(input,select,textarea):focus{
  border-color:var(--field-focus);
  background-color:#fff;
  box-shadow:0 0 0 4px var(--field-focus-ring),0 1px 2px #0f172a08;
 }
 
-:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) :is(input,select,textarea):disabled{
+:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form,.settings-form) :is(input,select,textarea):disabled{
  cursor:not-allowed;
  background:var(--field-disabled);
  color:#98a19c;
  opacity:1;
 }
 
-:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) :is(input,textarea)::placeholder{
+:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form,.settings-form) :is(input,textarea)::placeholder{
  color:var(--field-placeholder);
  opacity:1;
 }
 
-:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) :is(input,select,textarea)[aria-invalid='true']{
+:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form,.settings-form) :is(input,select,textarea)[aria-invalid='true']{
  border-color:#e25555;
  box-shadow:0 0 0 4px #ef444416;
 }
 
-:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) label{
+:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form,.settings-form) label{
  color:#3d4842;
  font-size:10px;
  font-weight:650;
@@ -173,7 +173,7 @@
 .remember-option input[type='checkbox']{width:16px;height:16px;border-radius:5px;accent-color:var(--green)}
 
 @media(max-width:600px){
- :is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) :is(input:not([type='checkbox']):not([type='color']),select){font-size:16px}
- :is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) textarea{font-size:16px}
+ :is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form,.settings-form) :is(input:not([type='checkbox']):not([type='color']),select){font-size:16px}
+ :is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form,.settings-form) textarea{font-size:16px}
  .message-composer input,.global-search input,.leads-search input,.conversation-filters input,.toolbar-input,.toolbar-select,.conversation-filters select{font-size:16px}
 }

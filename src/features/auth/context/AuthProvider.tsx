@@ -12,6 +12,7 @@ export function AuthProvider({children}:PropsWithChildren){
  const login=useCallback(async(credentials:LoginCredentials)=>{const response=await authApi.login(credentials);setUser(response.user)},[])
  const register=useCallback(async(input:RegisterInput)=>{const response=await authApi.register(input);setUser(response.user)},[])
  const logout=useCallback(async()=>{try{await authApi.logout()}finally{setUser(null)}},[])
- const value=useMemo(()=>({user,loading,login,register,logout}),[user,loading,login,register,logout])
+ const refresh=useCallback(async()=>{const response=await authApi.me();setUser(response.user)},[])
+ const value=useMemo(()=>({user,loading,login,register,logout,refresh}),[user,loading,login,register,logout,refresh])
  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
