@@ -29,6 +29,13 @@ export function ConversationsPage({onLogout}:{onLogout:()=>void}){
   const timer=window.setInterval(()=>void load(),3000)
   return()=>{active=false;window.clearInterval(timer)}
  },[selectedId])
+ const selectedUnreadCount=selected?.unreadCount??0
+ useEffect(()=>{
+  if(!selectedId||selectedUnreadCount===0)return
+  let active=true
+  conversationsApi.markRead(selectedId).then(()=>{if(active){setItems(current=>current.map(item=>item.id===selectedId?{...item,unreadCount:0}:item));setSelected(current=>current?.id===selectedId?{...current,unreadCount:0}:current)}}).catch(caught=>{if(active)setError(caught instanceof ApiError?caught.message:'Não foi possível marcar a conversa como lida.')})
+  return()=>{active=false}
+ },[selectedId,selectedUnreadCount])
  const submit=(event:FormEvent)=>{event.preventDefault();setLoading(true);setSearch(searchInput.trim())}
  const send=async(event:FormEvent)=>{event.preventDefault();if(!selected||!draft.trim())return;setSending(true);try{const {message}=await conversationsApi.sendText(selected.id,draft.trim());setMessages(current=>[...current,message]);setDraft('')}catch(caught){setError(caught instanceof ApiError?caught.message:'Não foi possível enviar a mensagem.')}finally{setSending(false)}}
  return <div className={`app-shell ${collapsed?'sidebar-collapsed':''}`}>
