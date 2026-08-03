@@ -5,5 +5,6 @@ import { App } from '@/app/App'
 import {AuthProvider} from '@/features/auth/context/AuthProvider'
 import '@/styles.css'
 import '@/features/auth/auth.css'
+import '@/form-controls.css'
 
 createRoot(document.getElementById('root')!).render(<StrictMode><BrowserRouter><AuthProvider><App /></AuthProvider></BrowserRouter></StrictMode>)

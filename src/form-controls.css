@@ -1,0 +1,179 @@
+:root{
+ --field-height:44px;
+ --field-radius:12px;
+ --field-border:#dce3df;
+ --field-border-hover:#bdc9c2;
+ --field-background:#fbfcfb;
+ --field-placeholder:#9aa5a0;
+ --field-focus:#20b85a;
+ --field-focus-ring:#25d3661f;
+ --field-disabled:#f2f5f3;
+}
+
+/* Base para campos independentes em formulários. */
+:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) :is(input:not([type='checkbox']):not([type='color']),select){
+ width:100%;
+ height:var(--field-height);
+ border:1px solid var(--field-border);
+ border-radius:var(--field-radius);
+ background-color:var(--field-background);
+ color:#17211c;
+ padding:0 13px;
+ font-size:11px;
+ line-height:1;
+ outline:0;
+ box-shadow:0 1px 2px #0f172a05;
+ transition:border-color .16s ease,box-shadow .16s ease,background-color .16s ease;
+}
+
+:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) textarea{
+ width:100%;
+ min-height:96px;
+ border:1px solid var(--field-border);
+ border-radius:var(--field-radius);
+ background:var(--field-background);
+ color:#17211c;
+ padding:12px 13px;
+ font-size:11px;
+ line-height:1.55;
+ outline:0;
+ resize:vertical;
+ box-shadow:0 1px 2px #0f172a05;
+ transition:border-color .16s ease,box-shadow .16s ease,background-color .16s ease;
+}
+
+:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) select{
+ appearance:none;
+ cursor:pointer;
+ padding-right:36px;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b756f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+ background-repeat:no-repeat;
+ background-position:right 12px center;
+}
+
+:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) :is(input,select,textarea):hover:not(:disabled){
+ border-color:var(--field-border-hover);
+ background-color:#fff;
+}
+
+:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) :is(input,select,textarea):focus{
+ border-color:var(--field-focus);
+ background-color:#fff;
+ box-shadow:0 0 0 4px var(--field-focus-ring),0 1px 2px #0f172a08;
+}
+
+:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) :is(input,select,textarea):disabled{
+ cursor:not-allowed;
+ background:var(--field-disabled);
+ color:#98a19c;
+ opacity:1;
+}
+
+:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) :is(input,textarea)::placeholder{
+ color:var(--field-placeholder);
+ opacity:1;
+}
+
+:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) :is(input,select,textarea)[aria-invalid='true']{
+ border-color:#e25555;
+ box-shadow:0 0 0 4px #ef444416;
+}
+
+:is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) label{
+ color:#3d4842;
+ font-size:10px;
+ font-weight:650;
+ letter-spacing:.005em;
+}
+
+.stage-create input[type='color']{
+ width:52px;
+ height:var(--field-height);
+ border:1px solid var(--field-border);
+ border-radius:var(--field-radius);
+ background:#fff;
+ padding:5px;
+ cursor:pointer;
+}
+
+/* Campos compostos: a borda e o foco pertencem ao contêiner. */
+:is(.login-input,.global-search,.leads-search,.conversation-filters form){
+ border:1px solid var(--field-border);
+ border-radius:var(--field-radius);
+ background:var(--field-background);
+ box-shadow:0 1px 2px #0f172a05;
+ transition:border-color .16s ease,box-shadow .16s ease,background-color .16s ease;
+}
+
+:is(.login-input,.global-search,.leads-search,.conversation-filters form):hover{
+ border-color:var(--field-border-hover);
+ background:#fff;
+}
+
+:is(.login-input,.global-search,.leads-search,.conversation-filters form):focus-within{
+ border-color:var(--field-focus);
+ background:#fff;
+ box-shadow:0 0 0 4px var(--field-focus-ring),0 1px 2px #0f172a08;
+}
+
+.login-input{height:48px;border-radius:13px}
+.login-input input,.global-search input,.leads-search input,.conversation-filters input{
+ color:#17211c;
+ background:transparent;
+}
+.login-input input::placeholder,.global-search input::placeholder,.leads-search input::placeholder,.conversation-filters input::placeholder,.message-composer input::placeholder{color:var(--field-placeholder)}
+.login-input:has(input[aria-invalid='true']){border-color:#e25555;box-shadow:0 0 0 4px #ef444416}
+
+/* Filtros, buscas e composer seguem o mesmo acabamento em escala compacta. */
+:is(.toolbar-select,.toolbar-input,.conversation-filters select){
+ height:40px;
+ border:1px solid var(--field-border);
+ border-radius:11px;
+ background-color:var(--field-background);
+ color:#4d5953;
+ padding:0 34px 0 12px;
+ font-size:10px;
+ outline:0;
+ transition:border-color .16s ease,box-shadow .16s ease,background-color .16s ease;
+}
+
+:is(.toolbar-select,.conversation-filters select){
+ appearance:none;
+ cursor:pointer;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236b756f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+ background-repeat:no-repeat;
+ background-position:right 10px center;
+}
+
+:is(.toolbar-select,.toolbar-input,.conversation-filters select):focus{
+ border-color:var(--field-focus);
+ background-color:#fff;
+ box-shadow:0 0 0 4px var(--field-focus-ring);
+}
+
+.stage-filter{height:40px;border-color:var(--field-border);border-radius:11px;background:var(--field-background);transition:border-color .16s ease,box-shadow .16s ease,background-color .16s ease}
+.stage-filter:hover{border-color:var(--field-border-hover);background:#fff}
+.stage-filter:focus-within{border-color:var(--field-focus);background:#fff;box-shadow:0 0 0 4px var(--field-focus-ring)}
+.stage-filter select{cursor:pointer;background:transparent}
+
+.message-composer input{
+ height:42px;
+ border:1px solid var(--field-border);
+ border-radius:12px;
+ background:var(--field-background);
+ color:#17211c;
+ padding:0 13px;
+ font-size:10px;
+ outline:0;
+ transition:border-color .16s ease,box-shadow .16s ease,background-color .16s ease;
+}
+.message-composer input:hover{border-color:var(--field-border-hover);background:#fff}
+.message-composer input:focus{border-color:var(--field-focus);background:#fff;box-shadow:0 0 0 4px var(--field-focus-ring)}
+
+.remember-option input[type='checkbox']{width:16px;height:16px;border-radius:5px;accent-color:var(--green)}
+
+@media(max-width:600px){
+ :is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) :is(input:not([type='checkbox']):not([type='color']),select){font-size:16px}
+ :is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form) textarea{font-size:16px}
+ .message-composer input,.global-search input,.leads-search input,.conversation-filters input,.toolbar-input,.toolbar-select,.conversation-filters select{font-size:16px}
+}
