@@ -14,4 +14,5 @@ export const whatsappAccountsApi={
   }),
   connect:(accountId:string)=>apiRequest<ConnectWhatsAppAccountResponse>(`/whatsapp/accounts/${accountId}/connect`),
   status:(accountId:string)=>apiRequest<WhatsAppAccountStatusResponse>(`/whatsapp/accounts/${accountId}/status`),
+  disconnect:(accountId:string)=>apiRequest<void>(`/whatsapp/accounts/${accountId}/connection`,{method:'DELETE'}),
 }

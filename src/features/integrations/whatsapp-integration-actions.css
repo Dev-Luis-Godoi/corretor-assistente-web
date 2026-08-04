@@ -1,0 +1,9 @@
+.integration-success{margin-bottom:16px;padding:11px 13px;border-radius:9px;background:#ecfdf5;color:#15803d;font-size:11px;display:flex;align-items:center;gap:8px}
+.integration-success button{margin-left:auto;border:0;background:none;color:inherit}
+.account-list article>.account-actions{display:flex;align-items:center;justify-content:flex-end;gap:6px}
+.account-actions button{min-height:31px;border:1px solid var(--border);border-radius:8px;background:#fff;padding:0 10px;font-size:8.5px;color:#4b5563;display:flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap}
+.account-actions button:disabled{opacity:.55;cursor:not-allowed}
+.account-actions .disconnect-button{color:#b91c1c;border-color:#fecaca;background:#fffafa}
+.account-actions .disconnect-button:hover:not(:disabled){background:#fef2f2}
+@media(max-width:760px){.account-list article>.account-actions{grid-column:2/-1;justify-content:flex-start}}
+@media(max-width:480px){.account-list article>.account-actions{grid-column:2;flex-wrap:wrap}}
