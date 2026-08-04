@@ -13,6 +13,7 @@ import {TasksPage} from '@/features/tasks/TasksPage'
 import {AutomationsPage} from '@/features/automations/AutomationsPage'
 import {ProfilePage} from '@/features/account/ProfilePage'
 import {SettingsPage} from '@/features/account/SettingsPage'
+import {PrivacyPage} from '@/features/account/PrivacyPage'
 
 export function App(){
  const {user,loading,logout}=useAuth()
@@ -31,6 +32,7 @@ export function App(){
   <Route path="/automations" element={user?<AutomationsPage onLogout={logout}/>:<Navigate to="/login" replace/>}/>
   <Route path="/profile" element={user?<ProfilePage onLogout={logout}/>:<Navigate to="/login" replace/>}/>
   <Route path="/settings" element={user?<SettingsPage onLogout={logout}/>:<Navigate to="/login" replace/>}/>
+  <Route path="/settings/privacy" element={user?(canManageWhatsApp?<PrivacyPage onLogout={logout}/>:<Navigate to="/settings" replace/>):<Navigate to="/login" replace/>}/>
   <Route path="/integrations/whatsapp" element={user?(canManageWhatsApp?<WhatsAppIntegrationPage onLogout={logout}/>:<Navigate to="/" replace/>):<Navigate to="/login" replace/>}/>
   <Route path="*" element={<Navigate to={user?'/':'/login'} replace/>}/>
  </Routes>

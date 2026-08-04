@@ -1,11 +1,13 @@
 import {useEffect,useState,type FormEvent} from 'react'
 import {Building2,Check,Kanban,LayoutList,Save,ShieldCheck,UsersRound} from 'lucide-react'
+import {Link} from 'react-router-dom'
 import {useAuth} from '@/features/auth/hooks/useAuth'
 import {ApiError} from '@/shared/api/apiClient'
 import {AccountPageLayout} from './AccountPageLayout'
 import {accountApi,type OrganizationSettings} from './accountApi'
 import {getDefaultCommercialView,setDefaultCommercialView,type DefaultCommercialView} from './preferences'
 import './account.css'
+import './privacy.css'
 
 const createdAtFormatter=new Intl.DateTimeFormat('pt-BR',{month:'long',year:'numeric'})
 
@@ -44,6 +46,7 @@ export function SettingsPage({onLogout}:{onLogout:()=>void}){
     </div>
     <p className="preference-note">Essa preferência fica apenas neste dispositivo e não altera os dados do seu funil.</p>
    </section>
+   {canManage&&<section className="account-card panel privacy-entry"><header><span><ShieldCheck size={18}/></span><div><h2>Privacidade e LGPD</h2><p>Retenção, portabilidade, consentimentos e auditoria.</p></div></header><div><p>Gerencie solicitações dos titulares e acompanhe ações administrativas.</p><Link className="secondary-button" to="/settings/privacy">Abrir centro de privacidade</Link></div></section>}
   </div>}
  </AccountPageLayout>
 }

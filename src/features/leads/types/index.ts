@@ -8,5 +8,5 @@ export interface Lead{id:string;title:string;source:string|null;notes:string|nul
 export interface LeadsMeta{page:number;limit:number;total:number;totalPages:number}
 export interface LeadsResponse{data:Lead[];meta:LeadsMeta}
 export interface PipelineStagesResponse{stages:LeadStage[]}
-export interface Contact{id:string;name:string|null;phone:string;email:string|null}
+export interface Contact{id:string;name:string|null;phone:string;email:string|null;origin?:string|null;consentStatus?:'UNKNOWN'|'GRANTED'|'REVOKED';consentAt?:string|null;consentSource?:string|null}
 export interface OrganizationUser{id:string;name:string;role:string}
