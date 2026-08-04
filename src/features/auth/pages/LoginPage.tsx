@@ -1,7 +1,6 @@
 import { useState, type FormEvent } from "react";
 import {
   ArrowRight,
-  BarChart3,
   CheckCircle2,
   Eye,
   EyeOff,
@@ -13,6 +12,7 @@ import {
 import { ApiError } from "@/shared/api/apiClient";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { BrandLogo } from "@/components/BrandLogo";
 
 export function LoginPage() {
   const { login } = useAuth();
@@ -51,18 +51,9 @@ export function LoginPage() {
     <main className="login-page">
       <section
         className="login-showcase"
-        aria-label="Benefícios do Corretor Assistente"
+        aria-label="Benefícios da Chavora Flow"
       >
-        <div className="login-brand">
-          <span>
-            <BarChart3 size={20} />
-          </span>
-          <strong>
-            Corretor
-            <br />
-            Assistente
-          </strong>
-        </div>
+        <BrandLogo inverse className="login-brand" />
         <div className="showcase-copy">
           <span className="showcase-pill">
             <Sparkles size={13} />
@@ -112,12 +103,7 @@ export function LoginPage() {
         <div className="showcase-orbit orbit-two" />
       </section>
       <section className="login-form-side">
-        <div className="login-mobile-brand">
-          <span>
-            <BarChart3 size={18} />
-          </span>
-          <strong>Corretor Assistente</strong>
-        </div>
+        <BrandLogo className="login-mobile-brand" />
         <div className="login-card">
           <div className="login-heading">
             <span className="login-lock">
@@ -206,7 +192,7 @@ export function LoginPage() {
           </p>
         </div>
         <footer>
-          © 2026 Corretor Assistente <span /> Privacidade <span /> Termos de uso
+          © 2026 Chavora Flow <span /> Privacidade <span /> Termos de uso
         </footer>
       </section>
     </main>

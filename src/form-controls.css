@@ -3,10 +3,10 @@
  --field-radius:12px;
  --field-border:#dce3df;
  --field-border-hover:#bdc9c2;
- --field-background:#fbfcfb;
+ --field-background:#ffffff;
  --field-placeholder:#9aa5a0;
  --field-focus:#20b85a;
- --field-focus-ring:#25d3661f;
+ --field-focus-ring:#2563eb1f;
  --field-disabled:#f2f5f3;
 }
 
@@ -170,7 +170,7 @@
 .message-composer input:hover{border-color:var(--field-border-hover);background:#fff}
 .message-composer input:focus{border-color:var(--field-focus);background:#fff;box-shadow:0 0 0 4px var(--field-focus-ring)}
 
-.remember-option input[type='checkbox']{width:16px;height:16px;border-radius:5px;accent-color:var(--green)}
+.remember-option input[type='checkbox']{width:16px;height:16px;border-radius:5px;accent-color:var(--brand)}
 
 @media(max-width:600px){
  :is(.modal,.auth-form-card,.create-account-form,.task-form,.inline-automation-form,.stage-create,.crm-fields,.activity-form,.settings-form) :is(input:not([type='checkbox']):not([type='color']),select){font-size:16px}

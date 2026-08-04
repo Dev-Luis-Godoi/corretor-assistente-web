@@ -1,0 +1,8 @@
+/* Semantic colors remain distinct from the Chavora Flow brand palette. */
+.stat-card.success .stat-icon{background:#ecfdf5;color:#16a34a}
+.stat-card.success p,.priority-baixa,.live-label{color:#15803d}
+.priority-baixa i,.live-label i,.conversation-row .avatar i.online{background:#22c55e}
+.form-feedback.success,.consent-status span.granted{background:#ecfdf5;color:#15803d}
+.account-icon.connected{background:#ecfdf5;color:#16a34a}
+.account-status.connected{color:#15803d;background:#ecfdf5}
+.chat-header-actions>span.connected{color:#16a34a}
