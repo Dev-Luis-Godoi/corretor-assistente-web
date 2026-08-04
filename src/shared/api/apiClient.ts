@@ -42,7 +42,13 @@ export async function apiRequest<T>(
       .json()
       .catch(() => ({}))) as ApiErrorPayload;
     if (response.status === 401)
-      window.dispatchEvent(new Event("auth:unauthorized"));
+      window.dispatchEvent(
+        new Event(
+          path.startsWith("/platform-admin")
+            ? "admin-auth:unauthorized"
+            : "auth:unauthorized",
+        ),
+      );
     throw new ApiError(
       response.status,
       payload.error ?? "REQUEST_ERROR",

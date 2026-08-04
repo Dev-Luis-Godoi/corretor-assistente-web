@@ -6,7 +6,7 @@ import {AccountPageLayout} from './AccountPageLayout'
 import {accountApi} from './accountApi'
 import './account.css'
 
-const roleLabels:Record<string,string>={OWNER:'Proprietário',ADMIN:'Administrador',AGENT:'Corretor'}
+const roleLabels:Record<string,string>={OWNER:'Corretor autônomo',ADMIN:'Corretor autônomo',AGENT:'Corretor autônomo'}
 
 export function ProfilePage({onLogout}:{onLogout:()=>void}){
  const {user,refresh}=useAuth()

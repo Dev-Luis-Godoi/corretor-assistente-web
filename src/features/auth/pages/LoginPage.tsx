@@ -179,7 +179,7 @@ export function LoginPage() {
           <div className="demo-access">
             <span>ACESSO SEGURO</span>
             <p>
-              Use o e-mail e a senha cadastrados na sua organização.
+              Use o e-mail e a senha cadastrados na sua conta.
             </p>
           </div>
           <p className="signup-copy">

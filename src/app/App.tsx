@@ -1,5 +1,6 @@
-import {Navigate,Route,Routes} from 'react-router-dom'
-import { DashboardPage } from '@/features/dashboard/pages/DashboardPage'
+import {lazy,Suspense} from 'react'
+import {Navigate,Route,Routes,useLocation} from 'react-router-dom'
+import {DashboardPage} from '@/features/dashboard/pages/DashboardPage'
 import {LoginPage} from '@/features/auth/pages/LoginPage'
 import {useAuth} from '@/features/auth/hooks/useAuth'
 import {LeadsPage} from '@/features/leads/pages/LeadsPage'
@@ -14,9 +15,16 @@ import {AutomationsPage} from '@/features/automations/AutomationsPage'
 import {ProfilePage} from '@/features/account/ProfilePage'
 import {SettingsPage} from '@/features/account/SettingsPage'
 import {PrivacyPage} from '@/features/account/PrivacyPage'
+import {useAdminAuth} from '@/features/admin/useAdminAuth'
+
+const AdminLoginPage=lazy(()=>import('@/features/admin/AdminLoginPage').then(module=>({default:module.AdminLoginPage})))
+const AdminDashboardPage=lazy(()=>import('@/features/admin/AdminDashboardPage').then(module=>({default:module.AdminDashboardPage})))
 
 export function App(){
  const {user,loading,logout}=useAuth()
+ const {admin,loading:adminLoading}=useAdminAuth()
+ const {pathname}=useLocation()
+ if(pathname.startsWith('/admin')){if(adminLoading)return <div className="app-loading" role="status"><span/><p>Validando acesso administrativo...</p></div>;return <Suspense fallback={<div className="app-loading" role="status"><span/><p>Preparando administração...</p></div>}><Routes><Route path="/admin/login" element={admin?<Navigate to="/admin" replace/>:<AdminLoginPage/>}/><Route path="/admin" element={admin?<AdminDashboardPage/>:<Navigate to="/admin/login" replace/>}/><Route path="/admin/*" element={<Navigate to={admin?'/admin':'/admin/login'} replace/>}/></Routes></Suspense>}
  if(loading)return <div className="app-loading" role="status"><span/><p>Preparando seu espaço...</p></div>
  const canManageWhatsApp=user?.role==='OWNER'||user?.role==='ADMIN'
  return <Routes>
