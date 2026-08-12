@@ -90,15 +90,6 @@ export function LoginPage() {
             </li>
           </ul>
         </div>
-        <div className="showcase-quote">
-          <p>“Agora começo o dia sabendo exatamente com quem preciso falar.”</p>
-          <div>
-            <span>LG</span>
-            <small>
-              <strong>Luis Godoi</strong>Corretor de imóveis
-            </small>
-          </div>
-        </div>
         <div className="showcase-orbit orbit-one" />
         <div className="showcase-orbit orbit-two" />
       </section>
@@ -176,17 +167,9 @@ export function LoginPage() {
               )}
             </button>
           </form>
-          <div className="demo-access">
-            <span>ACESSO SEGURO</span>
-            <p>
-              Use o e-mail e a senha cadastrados na sua conta.
-            </p>
-          </div>
           <p className="signup-copy">
             Ainda não tem uma conta?{" "}
-            <button
-              onClick={() => navigate("/register")}
-            >
+            <button onClick={() => navigate("/register")}>
               Solicitar acesso
             </button>
           </p>
