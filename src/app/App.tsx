@@ -31,7 +31,7 @@ export function App(){
   <Route path="/login" element={user?<Navigate to="/" replace/>:<LoginPage/>}/>
   <Route path="/register" element={user?<Navigate to="/" replace/>:<RegisterPage/>}/>
   <Route path="/forgot-password" element={user?<Navigate to="/" replace/>:<ForgotPasswordPage/>}/>
-  <Route path="/reset-password" element={user?<Navigate to="/" replace/>:<ResetPasswordPage/>}/>
+  <Route path="/reset-password" element={<ResetPasswordPage/>}/>
   <Route path="/" element={user?<DashboardPage onLogout={logout}/>:<Navigate to="/login" replace/>}/>
   <Route path="/leads" element={user?<LeadsPage onLogout={logout}/>:<Navigate to="/login" replace/>}/>
   <Route path="/pipeline" element={user?<PipelinePage onLogout={logout}/>:<Navigate to="/login" replace/>}/>

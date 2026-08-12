@@ -48,7 +48,7 @@ export function ForgotPasswordPage() {
                     type="email"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
-                    placeholder="voce@imobiliaria.com"
+                    placeholder="voce@exemplo.com"
                   />
                 </label>
                 <button className="login-submit" disabled={loading}>
