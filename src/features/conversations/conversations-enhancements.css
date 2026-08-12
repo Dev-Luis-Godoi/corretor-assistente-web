@@ -1,1 +1,170 @@
-.conversation-side i{width:7px;height:7px;border-radius:50%;background:#8b5cf6}.chat-header-actions{margin-left:auto!important;display:flex!important;align-items:center;gap:8px!important}.chat-header-actions>button{height:30px;border:1px solid var(--border);border-radius:8px;background:#fff;padding:0 9px;display:flex;align-items:center;gap:5px;font-size:8px;color:#4d5953}.chat-header-actions>button>span{width:6px;height:6px;border-radius:50%}.chat-header-actions>span{color:#2563eb}.chat-media{display:block;max-width:300px;max-height:280px;border-radius:8px;object-fit:cover}.chat-audio{width:270px;height:34px}.chat-document{display:flex;align-items:center;gap:7px;color:#1d4ed8;font-size:9px;text-decoration:none}.message-bubble .read{color:#168bd2!important}.template-picker{position:relative}.template-picker>button{height:42px}.template-picker>div{position:absolute;bottom:51px;left:0;width:280px;max-height:260px;overflow:auto;background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:0 12px 35px #0f172a1c;padding:6px;z-index:5}.template-picker>div>button{width:100%;height:auto;padding:9px;border-radius:7px;background:#fff;text-align:left;display:grid;gap:4px}.template-picker>div>button:hover{background:#f1f5f9}.template-picker strong{font-size:9px}.template-picker small{font-size:8px;color:#7f8984;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.template-picker p{font-size:8px;color:#7f8984;padding:8px}
+.conversation-side i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #8b5cf6;
+  box-shadow: 0 0 0 3px #ede9fe;
+}
+
+.chat-header-actions {
+  min-width: 0;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.chat-header-actions > button {
+  height: 34px;
+  flex: 0 0 auto;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #dbe3ec;
+  border-radius: 9px;
+  background: #fff;
+  color: #475569;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    border-color 0.16s ease,
+    color 0.16s ease,
+    background 0.16s ease;
+}
+
+.chat-header-actions > button:hover:not(:disabled) {
+  border-color: #bfdbfe;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.chat-header-actions > button > span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.chat-header-actions > span {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.chat-header-actions > span.disconnected {
+  background: #f1f5f9;
+  color: #94a3b8;
+}
+
+.chat-media {
+  display: block;
+  max-width: min(320px, 100%);
+  max-height: 300px;
+  border-radius: 9px;
+  object-fit: cover;
+}
+
+.chat-media + p {
+  margin-top: 8px;
+}
+
+.chat-audio {
+  width: min(290px, 100%);
+  height: 38px;
+}
+
+.chat-document {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #1d4ed8;
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.message-bubble .read {
+  color: #168bd2 !important;
+}
+
+.template-picker {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.template-picker > div {
+  position: absolute;
+  z-index: 5;
+  bottom: 52px;
+  left: 0;
+  width: 300px;
+  max-height: 280px;
+  overflow: auto;
+  padding: 7px;
+  border: 1px solid #dbe3ec;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 16px 38px rgb(15 23 42 / 16%);
+}
+
+.template-picker > div > button {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  display: grid;
+  gap: 5px;
+  border: 0;
+  border-radius: 8px;
+  background: #fff;
+  text-align: left;
+}
+
+.template-picker > div > button:hover {
+  background: #f1f5f9;
+}
+
+.template-picker strong {
+  color: #334155;
+  font-size: 11px;
+}
+
+.template-picker small {
+  overflow: hidden;
+  color: #7c8899;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.template-picker p {
+  margin: 0;
+  padding: 10px;
+  color: #7c8899;
+  font-size: 11px;
+}
+
+@media (max-width: 620px) {
+  .chat-header-actions {
+    gap: 5px;
+  }
+
+  .chat-header-actions > button {
+    width: 34px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .chat-header-actions > span {
+    display: none;
+  }
+
+  .template-picker > div {
+    width: min(300px, calc(100vw - 20px));
+  }
+}
