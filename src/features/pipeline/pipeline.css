@@ -38,6 +38,7 @@
   display: flex;
   flex-direction: column;
   padding: 18px 20px 20px;
+  background: #f8fafc;
 }
 
 .pipeline-error {
@@ -51,7 +52,7 @@
   display: flex;
   padding: 0;
   overflow: hidden;
-  border-radius: 14px;
+  background: #f8fafc;
 }
 
 .pipeline-workspace > .kanban-board {
@@ -60,6 +61,7 @@
   flex: 1;
   align-items: stretch;
   padding: 14px;
+  background: #f8fafc;
 }
 
 .pipeline-workspace .kanban-column {
@@ -69,6 +71,12 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
+  border: 1px solid #e2e8f0;
+  background: transparent;
+}
+
+.pipeline-workspace .kanban-card {
+  background: #fff;
 }
 
 .pipeline-workspace .kanban-cards {

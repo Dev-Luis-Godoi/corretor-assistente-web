@@ -245,7 +245,7 @@ export function PipelinePage({ onLogout }: { onLogout: () => void }) {
               <button onClick={() => setError("")}>×</button>
             </div>
           )}
-          <section className="panel pipeline-workspace">
+          <section className="pipeline-workspace">
             {loading ? (
               <div className="lead-skeleton">
                 {Array.from({ length: 5 }, (_, index) => (
