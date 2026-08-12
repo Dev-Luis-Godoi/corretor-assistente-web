@@ -3,20 +3,30 @@ import {
   Activity,
   BriefcaseBusiness,
   Building2,
+  Check,
   Clock3,
+  Copy,
   LogOut,
   MessageCircle,
   Power,
+  Plus,
   RefreshCw,
   Search,
   ShieldCheck,
   UserRound,
   Wifi,
+  X,
 } from "lucide-react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { ApiError } from "@/shared/api/apiClient";
 import { adminApi } from "./adminApi";
-import type { AccountStatus, AdminOverview, PlatformAccount } from "./types";
+import type {
+  AccountStatus,
+  AdminOverview,
+  BrokerCredentials,
+  CreatePlatformAccountInput,
+  PlatformAccount,
+} from "./types";
 import { useAdminAuth } from "./useAdminAuth";
 import "./admin.css";
 
@@ -27,6 +37,7 @@ const statusLabels: Record<AccountStatus, string> = {
   CANCELED: "Cancelada",
 };
 const actionLabels: Record<string, string> = {
+  ACCOUNT_CREATED: "Conta de corretor criada",
   PLATFORM_ADMIN_LOGIN: "Acesso administrativo",
   ACCOUNT_STATUS_UPDATED: "Status da conta alterado",
   ACCOUNT_SESSIONS_REVOKED: "Sessões encerradas",
@@ -47,6 +58,17 @@ export function AdminDashboardPage() {
   const [actionId, setActionId] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+  const [showCreateAccount, setShowCreateAccount] = useState(false);
+  const [creatingAccount, setCreatingAccount] = useState(false);
+  const [createdCredentials, setCreatedCredentials] =
+    useState<BrokerCredentials | null>(null);
+  const [credentialsCopied, setCredentialsCopied] = useState(false);
+  const [createInput, setCreateInput] = useState<CreatePlatformAccountInput>({
+    name: "",
+    email: "",
+    status: "TRIAL",
+    trialDays: 14,
+  });
   const load = useCallback(() => {
     Promise.all([
       adminApi.overview(),
@@ -128,6 +150,34 @@ export function AdminDashboardPage() {
     } finally {
       setActionId("");
     }
+  };
+  const createAccount = async (event: FormEvent) => {
+    event.preventDefault();
+    setCreatingAccount(true);
+    setError("");
+    try {
+      const result = await adminApi.createAccount(createInput);
+      setCreatedCredentials(result.credentials);
+      setShowCreateAccount(false);
+      setCreateInput({ name: "", email: "", status: "TRIAL", trialDays: 14 });
+      setMessage("Corretor criado. Copie e envie as credenciais por um canal seguro.");
+      load();
+    } catch (caught) {
+      setError(
+        caught instanceof ApiError
+          ? caught.message
+          : "Não foi possível criar o corretor.",
+      );
+    } finally {
+      setCreatingAccount(false);
+    }
+  };
+  const copyCredentials = async () => {
+    if (!createdCredentials) return;
+    await navigator.clipboard.writeText(
+      `E-mail: ${createdCredentials.email}\nSenha temporária: ${createdCredentials.temporaryPassword}`,
+    );
+    setCredentialsCopied(true);
   };
   return (
     <div className="admin-shell">
@@ -241,9 +291,14 @@ export function AdminDashboardPage() {
                   clientes.
                 </p>
               </div>
-              <span>
-                {accounts.length} resultado{accounts.length === 1 ? "" : "s"}
-              </span>
+              <div className="admin-panel-actions">
+                <span>
+                  {accounts.length} resultado{accounts.length === 1 ? "" : "s"}
+                </span>
+                <button type="button" onClick={() => setShowCreateAccount(true)}>
+                  <Plus size={14} /> Novo corretor
+                </button>
+              </div>
             </header>
             <form className="admin-filters" onSubmit={submit}>
               <label>
@@ -416,6 +471,36 @@ export function AdminDashboardPage() {
           </section>
         </div>
       </main>
+      {showCreateAccount && (
+        <div className="admin-modal-backdrop">
+          <section className="admin-modal" role="dialog" aria-modal="true" aria-labelledby="create-account-title">
+            <header>
+              <div><span><UserRound size={15} /></span><div><h2 id="create-account-title">Novo corretor</h2><p>Crie um espaço individual com pipeline pronto para uso.</p></div></div>
+              <button type="button" aria-label="Fechar" onClick={() => setShowCreateAccount(false)}><X size={17} /></button>
+            </header>
+            <form onSubmit={createAccount}>
+              <label>Nome completo<input autoFocus required minLength={2} maxLength={120} value={createInput.name} onChange={(event) => setCreateInput((current) => ({ ...current, name: event.target.value }))} placeholder="Nome do corretor" /></label>
+              <label>E-mail de acesso<input required type="email" value={createInput.email} onChange={(event) => setCreateInput((current) => ({ ...current, email: event.target.value }))} placeholder="corretor@email.com" /></label>
+              <div className="admin-modal-grid">
+                <label>Tipo de acesso<select value={createInput.status} onChange={(event) => setCreateInput((current) => ({ ...current, status: event.target.value as "TRIAL" | "ACTIVE" }))}><option value="TRIAL">Período de teste</option><option value="ACTIVE">Conta ativa</option></select></label>
+                {createInput.status === "TRIAL" && <label>Dias de teste<input required type="number" min={1} max={90} value={createInput.trialDays} onChange={(event) => setCreateInput((current) => ({ ...current, trialDays: Number(event.target.value) }))} /></label>}
+              </div>
+              <p className="admin-modal-note">A senha será gerada automaticamente e exibida uma única vez após a criação.</p>
+              <footer><button type="button" onClick={() => setShowCreateAccount(false)}>Cancelar</button><button type="submit" className="primary" disabled={creatingAccount}>{creatingAccount ? "Criando..." : "Criar corretor"}</button></footer>
+            </form>
+          </section>
+        </div>
+      )}
+      {createdCredentials && (
+        <div className="admin-modal-backdrop">
+          <section className="admin-modal admin-credentials" role="dialog" aria-modal="true" aria-labelledby="credentials-title">
+            <header><div><span><Check size={16} /></span><div><h2 id="credentials-title">Corretor criado</h2><p>Estas credenciais não serão exibidas novamente.</p></div></div></header>
+            <div className="admin-credentials-box"><label>E-mail</label><strong>{createdCredentials.email}</strong><label>Senha temporária</label><code>{createdCredentials.temporaryPassword}</code></div>
+            <p className="admin-modal-note">Envie por um canal seguro e oriente o corretor a alterar a senha pelo fluxo “Esqueci minha senha”.</p>
+            <footer><button type="button" className="primary" onClick={() => void copyCredentials()}>{credentialsCopied ? <Check size={14} /> : <Copy size={14} />}{credentialsCopied ? "Copiado" : "Copiar credenciais"}</button><button type="button" onClick={() => { setCreatedCredentials(null); setCredentialsCopied(false); }}>Concluir</button></footer>
+          </section>
+        </div>
+      )}
     </div>
   );
 }

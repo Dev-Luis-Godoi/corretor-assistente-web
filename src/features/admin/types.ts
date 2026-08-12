@@ -34,6 +34,16 @@ export interface PlatformAccount {
     tasks: number;
   };
 }
+export interface CreatePlatformAccountInput {
+  name: string;
+  email: string;
+  status: "TRIAL" | "ACTIVE";
+  trialDays: number;
+}
+export interface BrokerCredentials {
+  email: string;
+  temporaryPassword: string;
+}
 export interface AdminOverview {
   accounts: {
     total: number;

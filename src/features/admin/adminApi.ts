@@ -2,6 +2,8 @@ import { apiRequest } from "@/shared/api/apiClient";
 import type {
   AccountStatus,
   AdminOverview,
+  BrokerCredentials,
+  CreatePlatformAccountInput,
   PlatformAccount,
   PlatformAdmin,
 } from "./types";
@@ -24,6 +26,11 @@ export const adminApi = {
       "/platform-admin/accounts?" + query,
     );
   },
+  createAccount: (input: CreatePlatformAccountInput) =>
+    apiRequest<{ account: PlatformAccount; credentials: BrokerCredentials }>(
+      "/platform-admin/accounts",
+      { method: "POST", body: JSON.stringify(input) },
+    ),
   updateStatus: (id: string, status: AccountStatus) =>
     apiRequest<{ account: PlatformAccount }>(
       `/platform-admin/accounts/${id}/status`,
