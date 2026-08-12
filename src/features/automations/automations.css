@@ -100,8 +100,12 @@
 }
 
 .automation-panel > header .secondary-button {
-  min-width: max-content;
+  width: 132px;
+  min-width: 132px;
   height: 36px;
+  flex: 0 0 132px;
+  align-self: center;
+  justify-content: center;
   padding-inline: 11px;
   border-color: #dbe3ec;
   border-radius: 9px;
@@ -398,6 +402,8 @@
 
   .automation-panel > header .secondary-button {
     width: 100%;
+    min-width: 0;
+    flex-basis: auto;
     justify-content: center;
   }
 
