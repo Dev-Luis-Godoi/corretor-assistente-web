@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent } from "react";
+import { useSearchParams } from "react-router-dom";
 import {
   ArrowDown,
   ArrowUp,
@@ -11,6 +12,8 @@ import { AppSidebar } from "@/components/AppSidebar";
 import { ApiError } from "@/shared/api/apiClient";
 import { leadsApi } from "@/features/leads/api/leadsApi";
 import { LeadKanbanBoard } from "@/features/leads/components/LeadKanbanBoard";
+import { LeadDrawer } from "@/features/leads/components/LeadDrawer";
+import { LeadFormModal } from "@/features/leads/components/LeadFormModal";
 import { LeadTable } from "@/features/leads/components/LeadTable";
 import {
   ViewToggle,
@@ -31,6 +34,7 @@ const colors = [
 ];
 
 export function PipelinePage({ onLogout }: { onLogout: () => void }) {
+  const [params, setParams] = useSearchParams();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userMenu, setUserMenu] = useState(false);
@@ -41,9 +45,11 @@ export function PipelinePage({ onLogout }: { onLogout: () => void }) {
   const [view, setView] = useState<LeadViewMode>(getDefaultCommercialView);
   const [movingId, setMovingId] = useState<string | null>(null);
   const [managingStages, setManagingStages] = useState(false);
+  const [creatingLead, setCreatingLead] = useState(false);
   const [stageName, setStageName] = useState("");
   const [stageColor, setStageColor] = useState(colors[0]);
   const [refresh, setRefresh] = useState(0);
+  const selectedLeadId = params.get("lead");
 
   useEffect(() => {
     let active = true;
@@ -220,6 +226,15 @@ export function PipelinePage({ onLogout }: { onLogout: () => void }) {
               <Settings2 size={17} />
               <span>Etapas do funil</span>
             </button>
+            <button
+              type="button"
+              className="primary-button"
+              disabled={loading || stages.length === 0}
+              onClick={() => setCreatingLead(true)}
+            >
+              <Plus size={17} />
+              Novo lead
+            </button>
           </div>
         </header>
 
@@ -243,9 +258,13 @@ export function PipelinePage({ onLogout }: { onLogout: () => void }) {
                 stages={stages}
                 movingId={movingId}
                 onMove={(leadId, stageId) => void moveLead(leadId, stageId)}
+                onOpen={(leadId) => setParams({ lead: leadId })}
               />
             ) : (
-              <LeadTable leads={leads} />
+              <LeadTable
+                leads={leads}
+                onOpen={(leadId) => setParams({ lead: leadId })}
+              />
             )}
           </section>
         </div>
@@ -372,6 +391,26 @@ export function PipelinePage({ onLogout }: { onLogout: () => void }) {
           </section>
         </div>
       )}
+
+      <LeadFormModal
+        open={creatingLead}
+        stages={stages}
+        onClose={() => setCreatingLead(false)}
+        onCreated={(lead) => {
+          setLeads((items) => [lead, ...items]);
+          setCreatingLead(false);
+          setParams({ lead: lead.id });
+        }}
+      />
+      <LeadDrawer
+        leadId={selectedLeadId}
+        onClose={() => setParams({})}
+        onChanged={(updated) =>
+          setLeads((items) =>
+            items.map((item) => (item.id === updated.id ? updated : item)),
+          )
+        }
+      />
     </div>
   );
 }
