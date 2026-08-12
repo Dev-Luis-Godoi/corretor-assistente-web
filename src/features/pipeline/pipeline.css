@@ -72,11 +72,16 @@
   display: flex;
   flex-direction: column;
   border: 1px solid #e2e8f0;
-  background: transparent;
+  background: #fff;
+  box-shadow:
+    0 1px 2px #0f172a08,
+    0 10px 28px #0f172a0a;
 }
 
 .pipeline-workspace .kanban-card {
   background: #fff;
+  border-color: #e8edf3;
+  box-shadow: 0 1px 3px #0f172a0a;
 }
 
 .pipeline-workspace .kanban-cards {
