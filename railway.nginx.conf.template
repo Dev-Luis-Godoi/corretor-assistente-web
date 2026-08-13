@@ -9,6 +9,10 @@ server {
     listen ${PORT};
     server_name _;
 
+    if ($host = web-production-79c93.up.railway.app) {
+        return 301 https://chavoraflow.com.br$request_uri;
+    }
+
     root /usr/share/nginx/html;
     index index.html;
 
