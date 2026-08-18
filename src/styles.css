@@ -92,6 +92,9 @@ textarea:focus-visible {
 .sidebar nav {
   display: grid;
   gap: 5px;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
 }
 .nav-item,
 .collapse-button,
@@ -1139,6 +1142,15 @@ main {
   .sidebar.mobile-open .user-card,
   .sidebar.mobile-open .collapse-button {
     justify-content: flex-start;
+  }
+  .sidebar.mobile-open .user-copy {
+    display: grid;
+    min-width: 0;
+  }
+  .sidebar.mobile-open .user-copy strong,
+  .sidebar.mobile-open .user-copy small {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .sidebar-backdrop {
     display: block;
