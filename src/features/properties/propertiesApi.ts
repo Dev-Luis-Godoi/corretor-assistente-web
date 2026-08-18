@@ -1,7 +1,7 @@
 import {apiRequest} from '@/shared/api/apiClient'
 import type {Property,PropertyInput,PropertyListResponse,PropertyPurpose,PropertyStatus,PropertyType,StorageStatus} from './types'
 
-interface Filters{search?:string;status?:PropertyStatus|'';type?:PropertyType|'';purpose?:PropertyPurpose|'';page?:number;limit?:number}
+interface Filters{search?:string;status?:PropertyStatus|'';type?:PropertyType|'';purpose?:PropertyPurpose|'';ownerId?:string;page?:number;limit?:number}
 interface UploadTicket{uploadUrl:string;objectKey:string;expiresInSeconds:number}
 
 export const propertiesApi={

@@ -16,6 +16,7 @@ import {SettingsPage} from '@/features/account/SettingsPage'
 import {PrivacyPage} from '@/features/account/PrivacyPage'
 import {useAdminAuth} from '@/features/admin/useAdminAuth'
 import {PropertiesPage} from '@/features/properties/PropertiesPage'
+import {RelationshipPage} from '@/features/relationships/RelationshipPage'
 
 const AdminLoginPage=lazy(()=>import('@/features/admin/AdminLoginPage').then(module=>({default:module.AdminLoginPage})))
 const AdminDashboardPage=lazy(()=>import('@/features/admin/AdminDashboardPage').then(module=>({default:module.AdminDashboardPage})))
@@ -36,6 +37,8 @@ export function App(){
   <Route path="/leads" element={<Navigate to={user?`/pipeline${search}`:'/login'} replace/>}/>
   <Route path="/pipeline" element={user?<PipelinePage onLogout={logout}/>:<Navigate to="/login" replace/>}/>
   <Route path="/properties" element={user?<PropertiesPage onLogout={logout}/>:<Navigate to="/login" replace/>}/>
+  <Route path="/owners" element={user?<RelationshipPage kind="owners" onLogout={logout}/>:<Navigate to="/login" replace/>}/>
+  <Route path="/clients" element={user?<RelationshipPage kind="clients" onLogout={logout}/>:<Navigate to="/login" replace/>}/>
   <Route path="/conversations" element={user?<ConversationsPage onLogout={logout}/>:<Navigate to="/login" replace/>}/>
   <Route path="/tasks" element={user?<TasksPage onLogout={logout}/>:<Navigate to="/login" replace/>}/>
   <Route path="/automations" element={user?<AutomationsPage onLogout={logout}/>:<Navigate to="/login" replace/>}/>

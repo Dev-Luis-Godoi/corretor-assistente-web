@@ -33,6 +33,9 @@ const colors = [
   "#64748B",
 ];
 
+const closesAsClient = (stage: LeadStage) =>
+  stage.isWon || stage.name.trim().toLocaleLowerCase("pt-BR") === "contrato assinado";
+
 export function PipelinePage({ onLogout }: { onLogout: () => void }) {
   const [params, setParams] = useSearchParams();
   const [collapsed, setCollapsed] = useState(false);
@@ -103,8 +106,9 @@ export function PipelinePage({ onLogout }: { onLogout: () => void }) {
     );
     try {
       const { lead } = await leadsApi.updateStage(leadId, stageId);
-      setLeads((items) =>
-        items.map((item) => (item.id === leadId ? lead : item)),
+      setLeads((items) => closesAsClient(lead.stage)
+        ? items.filter((item) => item.id !== leadId)
+        : items.map((item) => (item.id === leadId ? lead : item)),
       );
     } catch (caught) {
       setLeads(snapshot);
@@ -405,11 +409,13 @@ export function PipelinePage({ onLogout }: { onLogout: () => void }) {
       <LeadDrawer
         leadId={selectedLeadId}
         onClose={() => setParams({})}
-        onChanged={(updated) =>
-          setLeads((items) =>
-            items.map((item) => (item.id === updated.id ? updated : item)),
-          )
-        }
+        onChanged={(updated) => {
+          setLeads((items) => closesAsClient(updated.stage)
+            ? items.filter((item) => item.id !== updated.id)
+            : items.map((item) => (item.id === updated.id ? updated : item)),
+          );
+          if (closesAsClient(updated.stage)) setParams({});
+        }}
       />
     </div>
   );

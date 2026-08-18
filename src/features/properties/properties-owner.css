@@ -1,0 +1,3 @@
+.property-toolbar{grid-template-columns:minmax(250px,1fr) repeat(4,minmax(120px,165px))}
+@media(max-width:1000px){.property-toolbar{grid-template-columns:1fr 1fr}.property-search{grid-column:1/-1}}
+@media(max-width:640px){.property-toolbar{grid-template-columns:1fr}.property-search{grid-column:auto}}
