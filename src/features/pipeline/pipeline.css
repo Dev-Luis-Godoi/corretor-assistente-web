@@ -97,6 +97,24 @@
   overflow: auto;
 }
 
+.pipeline-workspace .stage-select {
+  min-width: 150px;
+  max-width: 100%;
+  border: 1px solid #d9e0ea;
+  border-radius: 9px;
+  background: #fff;
+  color: #334155;
+  padding: 7px 30px 7px 10px;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.pipeline-workspace .stage-select:focus {
+  border-color: #2563eb;
+  outline: 2px solid rgb(37 99 235 / 14%);
+}
+
 .pipeline-workspace > .lead-skeleton {
   width: 100%;
   align-content: start;

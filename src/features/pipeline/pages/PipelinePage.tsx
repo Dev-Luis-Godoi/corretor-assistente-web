@@ -267,6 +267,9 @@ export function PipelinePage({ onLogout }: { onLogout: () => void }) {
             ) : (
               <LeadTable
                 leads={leads}
+                stages={stages}
+                movingId={movingId}
+                onMove={(leadId, stageId) => void moveLead(leadId, stageId)}
                 onOpen={(leadId) => setParams({ lead: leadId })}
               />
             )}
