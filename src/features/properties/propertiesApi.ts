@@ -15,4 +15,8 @@ export const propertiesApi={
  confirmPhoto(id:string,objectKey:string){return apiRequest<{property:Property}>(`/properties/${id}/photos`,{method:'POST',body:JSON.stringify({objectKey})})},
  removePhoto(id:string,photoId:string){return apiRequest<{property:Property}>(`/properties/${id}/photos/${photoId}`,{method:'DELETE'})},
  setCover(id:string,photoId:string){return apiRequest<{property:Property}>(`/properties/${id}/photos/${photoId}/cover`,{method:'PATCH'})},
+ prepareAuthorizationDocument(id:string,input:{fileName:string;mimeType:string;sizeBytes:number}){return apiRequest<UploadTicket>(`/properties/${id}/authorization-document/upload-url`,{method:'POST',body:JSON.stringify(input)})},
+ async uploadAuthorizationDocument(uploadUrl:string,file:File){const response=await fetch(uploadUrl,{method:'PUT',headers:{'Content-Type':file.type},body:file});if(!response.ok)throw new Error('Não foi possível enviar o documento.')},
+ confirmAuthorizationDocument(id:string,input:{objectKey:string;fileName:string}){return apiRequest<{property:Property}>(`/properties/${id}/authorization-document`,{method:'POST',body:JSON.stringify(input)})},
+ removeAuthorizationDocument(id:string){return apiRequest<{property:Property}>(`/properties/${id}/authorization-document`,{method:'DELETE'})},
 }
